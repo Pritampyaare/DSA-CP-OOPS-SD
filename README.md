@@ -1,1 +1,0 @@
-# paint-github-f710a
