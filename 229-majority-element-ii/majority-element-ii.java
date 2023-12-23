@@ -1,42 +1,35 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        
-        List<Integer> result = new ArrayList<Integer>();
-        
-        if(nums.length == 0) return result;
-        
-        int firstMajor = Integer.MAX_VALUE, secondMajor = Integer.MAX_VALUE, firstSum = 0, secondSum = 0;
-        
-        for(int i=0; i<nums.length; i++){
-            
-            if(nums[i] == firstMajor){
-                firstSum++;
-            }
-            else if(nums[i] == secondMajor){
-                secondSum++;
-            }
-            else if(firstSum == 0){
-                firstMajor = nums[i];
-                firstSum = 1;
-            }
-            else if(secondSum == 0){
-                secondMajor = nums[i];
-                secondSum = 1;
-            }
-            else{
-                firstSum--;
-                secondSum--;
+        int n = nums.length;
+        if(n==1) return new ArrayList<Integer>(Arrays.asList(nums[0]));
+        List<Integer> res = new ArrayList<>();
+        int first = 0, second = 1, firstCount = 0, secondCount = 0;
+
+        for(int i=0; i<n; i++){
+            if(nums[i] == first) firstCount++;
+            else if(nums[i] == second) secondCount++;
+            else if(firstCount == 0){
+                first = nums[i];
+                firstCount = 1;
+            }else if(secondCount == 0){
+                second = nums[i];
+                secondCount = 1;
+            }else{
+                firstCount--;
+                secondCount--;
             }
         }
-        firstSum = 0; secondSum = 0;
-        for(int i=0; i<nums.length; i++){
-            if(nums[i] == firstMajor) firstSum++;
-            else if(nums[i] == secondMajor) secondSum++;
+        firstCount=0; secondCount=0;
+        for(int i=0; i<n; i++){
+            if(nums[i] == first){
+                firstCount++;
+            }
+            else if(nums[i] == second){
+                secondCount++;
+            }
         }
-        
-        if(firstSum > nums.length/3) result.add(firstMajor);
-        if(secondSum > nums.length/3) result.add(secondMajor);
-        
-        return result;
+        if(firstCount > n/3) res.add(first);
+        if(secondCount > n/3) res.add(second);
+        return res;
     }
 }
