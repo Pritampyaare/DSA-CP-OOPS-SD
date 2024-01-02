@@ -10,8 +10,6 @@ class Solution {
                 map.put(e, map.get(e)-1);
                 if(map.get(e)==0) map.remove(e);
             }
-            
-
             ans.add(temp);
         }
         return ans;
