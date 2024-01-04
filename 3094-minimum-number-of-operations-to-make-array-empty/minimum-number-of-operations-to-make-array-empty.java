@@ -1,28 +1,19 @@
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public int minOperations(int[] nums) {
-        
-        Map<Integer, Integer> mp = new HashMap<>();
-        
-        
-        for (int num : nums) {
-            mp.put(num, mp.getOrDefault(num, 0) + 1);
-        }
-        
-        int count = 0;
-        
-        
-        for (Map.Entry<Integer, Integer> entry : mp.entrySet()) {
-            int t = entry.getValue();
-            if (t == 1)
+        int[] freq = new int[1000001];
+        for(int e: nums) freq[e]++;
+        int count=0;
+        for(int i=1; i<freq.length; i++){
+            if(freq[i]==1){
                 return -1;
-            count += t / 3; 
-            if (t % 3 != 0)
+            }else if(freq[i]==2){
                 count++;
+            }else if(freq[i]>=3){
+                if(freq[i]%3!=0){
+                    count += (freq[i]/3)+1;
+                }else count += freq[i]/3;
+            }
         }
         return count;
     }
 }
-
