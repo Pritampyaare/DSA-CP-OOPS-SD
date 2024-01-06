@@ -13,16 +13,25 @@ class Solution {
     public int jobSchedulingHelper(int[][] job, int idx, int[] memo){
         if(idx==job.length) return 0;
         if( memo[idx] != -1) return memo[idx];
-        int pick = job[idx][2]+jobSchedulingHelper(job, findNext(idx, job), memo);
+        int pick = job[idx][2]+jobSchedulingHelper(job, findNext(job, idx), memo);
         int skip = jobSchedulingHelper(job, idx+1, memo);
         return memo[idx]=Math.max(pick, skip);
     }
-    private int findNext(int cur, int[][] jobs) {
-        for (int next = cur + 1; next < jobs.length; next++) {
-            if (jobs[next][0] >= jobs[cur][1]) {
-                return next;   
+    private int findNext(int[][] jobs, int idx) {
+        int lo = idx + 1;
+        int hi = jobs.length -1;
+        while(lo <= hi) {
+            int mid = lo + (hi - lo)/2;
+            if(jobs[mid][0] >= jobs[idx][1]) {
+                if(jobs[mid-1][0] >= jobs[idx][1])
+                    hi = mid - 1;
+                else 
+                    return mid;
+            } else {
+                lo = mid + 1;
             }
         }
+        
         return jobs.length;
     }
 }
