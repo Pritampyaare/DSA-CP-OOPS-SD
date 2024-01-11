@@ -1,24 +1,27 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        HashSet<List<Integer>> ans = new HashSet<>();
-        solve(ans, new ArrayList<>(), candidates, target, 0);
-        return new ArrayList<>(ans);
+        List<List<Integer>> ansList = new ArrayList<>();
+        sol(0, candidates, target, new ArrayList<>(), ansList);
+        return ansList;
     }
-    public static void solve(HashSet<List<Integer>> ans, List<Integer> group, int[] candidates, int target, int idx){
 
-        if(target==0){
-            ans.add(new ArrayList<>(group));
+    public static void sol(int ind, int[] arr, int target, List<Integer> ds, List<List<Integer>> ansList){
+        
+        if(ind == arr.length || target < 0) return;
+        if(target == 0){
+            ansList.add(new ArrayList<>(ds));
             return;
-        } 
-        if(target<0 || idx==candidates.length) return;
-        ArrayList<Integer> al1 = new ArrayList<>();
-        al1.addAll(group); al1.add(candidates[idx]);
-        solve(ans, al1, candidates, target-candidates[idx], idx+1);
-        ArrayList<Integer> al2 = new ArrayList<>();
-        al2.addAll(group); al2.add(candidates[idx]);
-        solve(ans, al2, candidates, target-candidates[idx], idx);
-        ArrayList<Integer> al3 = new ArrayList<>();
-        al3.addAll(group);
-        solve(ans, al3, candidates, target, idx+1);
+        }
+        else{
+            for(int i=ind; i<arr.length; i++){
+                if(arr[i] <= target){
+                    ds.add(arr[i]);
+                    sol(i, arr, target-arr[i], ds, ansList);
+                    ds.remove(ds.size()-1);
+                }else{
+                    sol(i+1, arr, target-arr[i], ds, ansList);
+                }
+            }
+        }
     }
 }
