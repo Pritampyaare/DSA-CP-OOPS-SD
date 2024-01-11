@@ -7,7 +7,7 @@ class Solution {
 
     public static void sol(int ind, int[] arr, int target, List<Integer> ds, List<List<Integer>> ansList){
         
-        if(ind == arr.length || target < 0) return;
+        if(target < 0) return;
         if(target == 0){
             ansList.add(new ArrayList<>(ds));
             return;
