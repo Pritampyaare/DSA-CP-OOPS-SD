@@ -12,13 +12,10 @@ class Solution {
             ansList.add(new ArrayList<>(ds));
             return;
         }
-        else{
-            for(int i=ind; i<arr.length; i++){
-                ds.add(arr[i]);
-                sol(i, arr, target-arr[i], ds, ansList);
-                ds.remove(ds.size()-1);
-                
-            }
+        for(int i=ind; i<arr.length; i++){
+            ds.add(arr[i]);
+            sol(i, arr, target-arr[i], ds, ansList);
+            ds.remove(ds.size()-1);
         }
     }
 }
