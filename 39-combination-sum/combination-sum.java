@@ -14,7 +14,6 @@ class Solution {
         }
         else{
             for(int i=ind; i<arr.length; i++){
-                
                 ds.add(arr[i]);
                 sol(i, arr, target-arr[i], ds, ansList);
                 ds.remove(ds.size()-1);
