@@ -30,29 +30,26 @@ class Solution {
         return ans;
     }
     public Pair helper(TreeNode root){
+        Pair left=null, right=null;
+        int min=0, max=0;
         if(root.left==null && root.right==null) return new Pair(root.val, root.val);
         if(root.left==null){
-            Pair right = helper(root.right);
-            int min = right.min, max = right.max;
-            maxDiff = Math.max(maxDiff, Math.abs(root.val-min));
-            maxDiff = Math.max(maxDiff, Math.abs(root.val-max));
-            min = Math.min(min, root.val);
-            max = Math.max(max, root.val);
-            return new Pair(min, max);
+            right = helper(root.right);
+            min = right.min; max = right.max;
+            
         }
         if(root.right==null){
-            Pair left = helper(root.left);
-            int min = left.min, max = left.max;
-            maxDiff = Math.max(maxDiff, Math.abs(root.val-min));
-            maxDiff = Math.max(maxDiff, Math.abs(root.val-max));
-            min = Math.min(min, root.val);
-            max = Math.max(max, root.val);
-            return new Pair(min, max);
+            left = helper(root.left);
+            min = left.min; max = left.max;
+            
         }
-        Pair left = helper(root.left);
-        Pair right = helper(root.right);
-        int min = Math.min(left.min, right.min);
-        int max = Math.max(left.max, right.max);
+        if(root.left!=null && root.right!=null){
+            left = helper(root.left);
+            right = helper(root.right);
+            min = Math.min(left.min, right.min);
+            max = Math.max(left.max, right.max);
+        }
+        
         maxDiff = Math.max(maxDiff, Math.abs(root.val-min));
         maxDiff = Math.max(maxDiff, Math.abs(root.val-max));
         min = Math.min(min, root.val);
