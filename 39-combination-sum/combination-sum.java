@@ -14,13 +14,11 @@ class Solution {
         }
         else{
             for(int i=ind; i<arr.length; i++){
-                if(arr[i] <= target){
-                    ds.add(arr[i]);
-                    sol(i, arr, target-arr[i], ds, ansList);
-                    ds.remove(ds.size()-1);
-                }else{
-                    sol(i+1, arr, target-arr[i], ds, ansList);
-                }
+                
+                ds.add(arr[i]);
+                sol(i, arr, target-arr[i], ds, ansList);
+                ds.remove(ds.size()-1);
+                
             }
         }
     }
