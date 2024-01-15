@@ -7,13 +7,13 @@ class Solution {
             if(arr[winner]>-1) arr[winner]=1;
             arr[losser] = arr[losser]>0 ? -1 : arr[losser]-1;
         }
-        List<Integer> winners = new ArrayList<>(), lossers = new ArrayList<>();
+        List<Integer> winnersList = new ArrayList<>(), lossersList = new ArrayList<>();
         for(int i=0; i<arr.length; i++){
-            if(arr[i]>0) winners.add(i);
-            else if(arr[i]==-1) lossers.add(i);
+            if(arr[i]>0) winnersList.add(i);
+            else if(arr[i]==-1) lossersList.add(i);
         }
         List<List<Integer>> res = new ArrayList<>();
-        res.add(winners); res.add(lossers);
+        res.add(winnersList); res.add(lossersList);
         return res;
     }
 }
