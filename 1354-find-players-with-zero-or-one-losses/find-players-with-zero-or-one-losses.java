@@ -1,19 +1,18 @@
 class Solution {
     public List<List<Integer>> findWinners(int[][] matches) {
-        HashMap<Integer, Integer> lmap = new HashMap<>();
-        HashSet<Integer> wset = new HashSet<>();
-        for(int i=0; i<matches.length; i++){
-            int winer = matches[i][0], losser = matches[i][1];
-            if(!lmap.containsKey(winer)) wset.add(winer);
-            if(wset.contains(losser)) wset.remove(losser);
-            lmap.put(losser, lmap.getOrDefault(losser, 0)+1);
-        }
+        int[] arr = new int[100001];
         
+        for(int i=0; i<matches.length; i++){
+            int winner = matches[i][0], losser = matches[i][1];
+            if(arr[winner]>-1) arr[winner]=1;
+            arr[losser] = arr[losser]>0 ? -1 : arr[losser]-1;
+        }
+        List<Integer> winners = new ArrayList<>(), lossers = new ArrayList<>();
+        for(int i=0; i<arr.length; i++){
+            if(arr[i]>0) winners.add(i);
+            else if(arr[i]==-1) lossers.add(i);
+        }
         List<List<Integer>> res = new ArrayList<>();
-        List<Integer> winners = new ArrayList<>(wset);
-        List<Integer> lossers = new ArrayList<>();
-        for(int k: lmap.keySet()) if(lmap.get(k)==1) lossers.add(k);
-        Collections.sort(winners); Collections.sort(lossers);
         res.add(winners); res.add(lossers);
         return res;
     }
