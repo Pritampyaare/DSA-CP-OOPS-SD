@@ -20,8 +20,8 @@ class RandomizedSet {
         int idx = valToIdxMap.get(val);
         int lastElement = valueList.get(valueList.size()-1);
         valueList.set(idx, lastElement);
-        valToIdxMap.put(lastElement, idx);
         valueList.remove(valueList.size()-1);
+        valToIdxMap.put(lastElement, idx);
         valToIdxMap.remove(val);
         
         return true;
