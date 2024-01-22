@@ -6,7 +6,11 @@ class Solution {
             if(set.contains(e)) repeated=e;
             set.add(e);
         }
-        for(int i=1; i<=nums.length; i++) if(!set.contains(i)) missing=i;
+        for(int i=1; i<=nums.length; i++){
+            if(!set.contains(i)){
+                missing=i; break;
+            }
+        }
         return new int[]{repeated, missing};
 
     }
