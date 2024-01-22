@@ -1,17 +1,16 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
-        int repeated = -1, missing=-1;
+        boolean[] visited = new boolean[nums.length];
+        int repeated=-1, missing=-1;
         for(int e: nums){
-            if(set.contains(e)) repeated=e;
-            set.add(e);
+            if(visited[e-1]) repeated=e;
+            visited[e-1]=true;
         }
-        for(int i=1; i<=nums.length; i++){
-            if(!set.contains(i)){
-                missing=i; break;
+        for(int i=0; i<nums.length; i++){
+            if(visited[i]==false){
+                missing=i+1; break;
             }
         }
         return new int[]{repeated, missing};
-
     }
 }
