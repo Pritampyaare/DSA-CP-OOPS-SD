@@ -9,9 +9,7 @@ class Solution {
             max = Math.max(max, s.length());
             return;
         }
-        if(isValid(s, arr.get(index))){
-            helper(arr, s+arr.get(index), index+1);
-        }
+        if(isValid(s, arr.get(index))) helper(arr, s+arr.get(index), index+1);
         helper(arr, s, index+1);
     }
     public boolean isValid(String s1, String s2){
