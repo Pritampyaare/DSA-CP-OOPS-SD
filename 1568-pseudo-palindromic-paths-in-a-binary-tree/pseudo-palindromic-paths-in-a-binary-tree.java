@@ -18,6 +18,7 @@ class Solution {
         int[] freq = new int[10];
         return helper(root, freq);
     }
+    
     public int helper(TreeNode root, int[] freq){
         freq[root.val]++;
         if(root.left==null && root.right==null){
