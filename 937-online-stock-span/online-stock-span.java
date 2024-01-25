@@ -1,24 +1,17 @@
 class StockSpanner {
-    Stack<Integer> stk;
-    HashMap<Integer, Integer> map;
-    int size = 0;
-    
+    Stack<int[]> stk;
+
     public StockSpanner() {
         stk = new Stack<>();
-        map = new HashMap<>();
     }
     
     public int next(int price) {
-        while(!stk.isEmpty() && map.get(stk.peek())<=price){
-            map.remove(stk.peek());
-            stk.pop();
-        } 
-        int ngl = stk.isEmpty() ? -1 : stk.peek();
-        int ans = size-ngl;
-        map.put(size, price);
-        stk.push(size);
-        size++;
-        return ans;
+        int span=1;
+        while(!stk.isEmpty() && stk.peek()[0]<=price){
+            span += stk.pop()[1];
+        }
+        stk.push(new int[]{price, span});
+        return span;
     }
 }
 
