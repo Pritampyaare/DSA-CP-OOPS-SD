@@ -8,18 +8,16 @@ class Solution {
             ngr[i] = stk.isEmpty() ? n : stk.peek();
             stk.push(i);
         }
-        int l=0, r=k-1, max=nums[0], i=0, j=0;
+        int l=0, r=k-1, i=0, j=0;
         int[] ans = new int[n-k+1];
         while(r<n){
             while(ngr[i]<=r){
                 i=ngr[i];
-                max = Math.max(max, nums[i]);
             }
-            ans[j++]=max;
+            ans[j++]=nums[i];
             l++; r++;
             if(i<l && l<n){
                 i=l;
-                max = nums[i];
             }
         }
         return ans;
