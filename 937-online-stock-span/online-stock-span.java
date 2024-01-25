@@ -9,7 +9,10 @@ class StockSpanner {
     }
     
     public int next(int price) {
-        while(!stk.isEmpty() && map.get(stk.peek())<=price) stk.pop();
+        while(!stk.isEmpty() && map.get(stk.peek())<=price){
+            map.remove(stk.peek());
+            stk.pop();
+        } 
         int ngl = stk.isEmpty() ? -1 : stk.peek();
         int ans = size-ngl;
         map.put(size, price);
